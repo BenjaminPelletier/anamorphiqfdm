@@ -12,3 +12,14 @@ python generate_anamorphic_mesh.py "FRONT" "LEFT" "RIGHT" --font "Arial" --outpu
 ```
 
 The `--font` parameter accepts any CadQuery-supported font name or path.
+
+### Running with uv
+
+This repository ships a `pyproject.toml` describing the CadQuery dependency so you can run
+the script directly with [`uv`](https://docs.astral.sh/uv/). The following command will
+create and reuse a virtual environment, install CadQuery, and execute the script in a
+single step:
+
+```bash
+uv run generate_anamorphic_mesh.py "FRONT" "LEFT" "RIGHT" --font "Arial" --output mesh.stl
+```

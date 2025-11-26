@@ -1,0 +1,14 @@
+[project]
+name = "anamorphiqfdm"
+version = "0.1.0"
+description = "Generate an anamorphic intersection mesh from three text strings using CadQuery"
+readme = "README.md"
+authors = [{ name = "Anamorphiq" }]
+requires-python = ">=3.10"
+dependencies = [
+    "cadquery>=2.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
