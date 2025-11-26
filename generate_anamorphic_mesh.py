@@ -3,6 +3,7 @@ Script to generate an anamorphic intersection mesh from three text strings using
 """
 
 import argparse
+import os.path
 from pathlib import Path
 
 import cadquery as cq
@@ -10,10 +11,14 @@ import cadquery as cq
 
 def _plane_with_rotation(angle_deg: float) -> cq.Plane:
     base_plane = cq.Plane.XZ()  # Normal points along +Y, giving a front-facing orientation
-    return base_plane.rotated((0, 0, angle_deg))
+    return base_plane.rotated((0, angle_deg, 0))
 
 
 def _create_text_prism(text: str, font: str, plane: cq.Plane, extrusion: float) -> cq.Solid:
+    if os.path.exists(font):
+        kw_args = {"fontPath": font}
+    else:
+        kw_args = {"font": font}
     workplane = cq.Workplane(plane)
     text_solid = (
         workplane
@@ -21,11 +26,11 @@ def _create_text_prism(text: str, font: str, plane: cq.Plane, extrusion: float) 
             txt=text,
             fontsize=1.0,
             distance=extrusion * 2,
-            font=font,
             halign="center",
             valign="center",
             combine=True,
             clean=True,
+            **kw_args,
         )
         .translate(plane.zDir * -extrusion)
         .val()
