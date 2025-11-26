@@ -23,3 +23,6 @@ single step:
 ```bash
 uv run generate_anamorphic_mesh.py "FRONT" "LEFT" "RIGHT" --font "Arial" --output mesh.stl
 ```
+
+CadQuery currently supports Python up to 3.13, so ensure the selected interpreter is
+below 3.14 when running with `uv`.
