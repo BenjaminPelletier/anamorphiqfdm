@@ -26,3 +26,13 @@ uv run generate_anamorphic_mesh.py "FRONT" "LEFT" "RIGHT" --font "Arial" --outpu
 
 CadQuery currently supports Python up to 3.13, so ensure the selected interpreter is
 below 3.14 when running with `uv`.
+
+## Rendering orthographic views of the STL
+
+Use `render_anamorphic_views.py` to load the generated STL with `trimesh` and write
+three orthographic PNG renders that match the front, 45° left, and 45° right
+viewing planes used to create the model:
+
+```bash
+python render_anamorphic_views.py mesh.stl --output-dir renders --size 1024
+```
