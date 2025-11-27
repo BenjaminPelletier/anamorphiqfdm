@@ -36,3 +36,25 @@ viewing planes used to create the model:
 ```bash
 python render_anamorphic_views.py mesh.stl --output-dir renders --size 1024
 ```
+
+## Reducing floating geometry in an STL
+
+`reduce_geometry.py` removes disconnected mesh components that float above the
+text baseline by more than a configurable clearance (default: 0.01 units). The
+script requires `trimesh` and a graph engine dependency to split disconnected
+components. Install the optional graph extras to avoid `ImportError: no graph
+engines available!` when splitting meshes:
+
+```bash
+pip install "trimesh[all]"
+# or at minimum install one of the graph engines:
+pip install networkx scipy
+```
+
+Run the reducer against an STL and write the output beside the input with a
+`_reduced` suffix (or set `--output` to choose a path):
+
+```bash
+python reduce_geometry.py objectivity.stl
+python reduce_geometry.py objectivity.stl --clearance 0.02 --output objectivity_filtered.stl
+```
