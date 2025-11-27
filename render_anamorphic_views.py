@@ -47,7 +47,7 @@ def _projection_basis(view_dir: np.ndarray) -> np.ndarray:
     """
 
     view_dir = view_dir / np.linalg.norm(view_dir)
-    up = np.array([0.0, 0.0, 1.0])
+    up = np.array([0.0, 0.0, -1.0])
     if np.allclose(np.cross(view_dir, up), 0.0):
         up = np.array([1.0, 0.0, 0.0])
 
@@ -84,7 +84,7 @@ def _render_projection(
     collection = PolyCollection(
         polygons,
         closed=True,
-        facecolor="lightgray",
+        facecolor="black",
         edgecolor="black",
         linewidth=0.2,
     )
@@ -137,7 +137,7 @@ def main() -> None:
     if not isinstance(mesh, trimesh.Trimesh):
         raise ValueError("Loaded geometry is not a mesh")
 
-    base_dir = np.array([0.0, 1.0, 0.0])
+    base_dir = np.array([0.0, -1.0, 0.0])
     view_angles: Dict[str, float] = {
         "front": 0.0,
         "left": 45.0,
