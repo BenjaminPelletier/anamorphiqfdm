@@ -39,7 +39,14 @@ def reduce_geometry(
     """
 
     ground_level = float(mesh.vertices[:, 2].min())
-    components = mesh.split(only_watertight=False)
+    try:
+        components = mesh.split(only_watertight=False)
+    except ImportError as exc:
+        raise ImportError(
+            "trimesh requires a graph engine such as `networkx` or `scipy` "
+            "to split meshes. Install one (for example, via `pip install "
+            "trimesh[all]` or `pip install networkx scipy`) and retry."
+        ) from exc
 
     kept_components = []
     removed_count = 0
