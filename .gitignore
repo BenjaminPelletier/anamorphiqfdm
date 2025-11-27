@@ -125,3 +125,4 @@ dmypy.json
 
 # 3D output
 *.stl
+/renders
